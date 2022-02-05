@@ -359,37 +359,33 @@ class App extends Component {
           long: "-104.802042",
         },
       ],
-      inputValue: ""
+      inputValue: "",
     };
   }
 
   handleChange = (e) => {
-    const { data, inputValue } = this.state;
-    let inputName = e.target.value; 
-    this.setState({inputValue: inputName})
-    let newData = [...data]
-    let filteredData = newData.filter(el => el.name.toLowerCase().indexOf(inputName) > -1)
-    console.log(filteredData)
-    this.setState({data: filteredData})
-  }
+    let inputName = e.target.value;
+    this.setState({ inputValue: inputName });
+  };
 
   render() {
     const { data, inputValue } = this.state;
-    const content = data.map((el) => {
-      const { name, capital, abbr } = el;
-      return (
-        <ListItem name={name} capital={capital} abbr={abbr} key={name}/>
-      );
-    });
+    const result = data
+      .filter((el) => el.name.toLowerCase().startsWith(inputValue))
+      .map((el) => {
+        const { name, capital, abbr } = el;
+        return (
+          <ListItem name={name} capital={capital} abbr={abbr} key={name} />
+        );
+      });
 
     return (
       <div className="App">
-        <Input value={inputValue} handleChange={this.handleChange}/>
-        <ul>{content}</ul>
+        <Input value={inputValue} handleChange={this.handleChange} />
+        <ul>{result}</ul>
       </div>
     );
   }
 }
-
 
 export default App;
