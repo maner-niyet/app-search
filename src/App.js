@@ -1,6 +1,7 @@
 import "./App.css";
 
 import React, { Component } from "react";
+import ListItem from "./components/ListItem";
 
 class App extends Component {
   constructor() {
@@ -358,24 +359,35 @@ class App extends Component {
           long: "-104.802042",
         },
       ],
+      inputValue: ""
     };
   }
 
+  handleChange = (e) => {
+    const { data, inputValue } = this.state;
+    let inputName = e.target.value; 
+    this.setState({inputValue: inputName})
+    let newData = [...data]
+    let filteredData = newData.filter(el => el.name.toLowerCase().indexOf(inputName) > -1)
+    console.log(filteredData)
+    this.setState({data: filteredData})
+  }
+
   render() {
-    const { data } = this.state;
+    const { data, inputValue } = this.state;
     const content = data.map((el) => {
       const { name, capital, abbr } = el;
       return (
-        <li>
-          <h2>State name is {name}</h2>
-          <h3>Capital is {capital}</h3>
-          <p>Appbreviation {abbr}</p>
-        </li>
+        <ListItem name={name} capital={capital} abbr={abbr} key={name}/>
       );
     });
 
     return (
-      <div>
+      <div className="App">
+        
+        <label htmlFor="search">search for state</label>
+        
+        <input type="text" id="search" placeholder="enter state name" onChange={this.handleChange} value={inputValue}/>
         <ul>{content}</ul>
       </div>
     );
