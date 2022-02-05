@@ -1,5 +1,5 @@
 import "./App.css";
-
+import Input from "./components/Input";
 import React, { Component } from "react";
 import ListItem from "./components/ListItem";
 
@@ -384,14 +384,12 @@ class App extends Component {
 
     return (
       <div className="App">
-        
-        <label htmlFor="search">search for state</label>
-        
-        <input type="text" id="search" placeholder="enter state name" onChange={this.handleChange} value={inputValue}/>
+        <Input value={inputValue} handleChange={this.handleChange}/>
         <ul>{content}</ul>
       </div>
     );
   }
 }
+
 
 export default App;
