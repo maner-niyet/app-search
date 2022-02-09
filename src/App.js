@@ -388,15 +388,9 @@ class App extends Component {
     return (
       <div className="App">
         <h2>Search by:</h2>
-        <RadioButton/>
-        <RadioButton/>
-        <RadioButton/>
-        {/* <label htmlFor="name">Name</label>
-        <input type="radio" id="name" name="location" onChange={this.handleRadio} checked={radioBtn === "name"}/>
-        <label htmlFor="capital">Capital</label>
-        <input type="radio" id="capital" name="location" onChange={this.handleRadio} checked={radioBtn === "capital"}/>
-        <label htmlFor="abbr">Abbreviation</label>
-        <input type="radio" id="abbr" name="location" onChange={this.handleRadio} checked={radioBtn === "abbr"}/> */}
+        <RadioButton id="name" handleRadio={this.handleRadio} radioBtn={radioBtn}/>
+        <RadioButton id="capital" handleRadio={this.handleRadio} radioBtn={radioBtn}/>
+        <RadioButton id="abbr" handleRadio={this.handleRadio} radioBtn={radioBtn}/>
         <br />
         <Input value={inputValue} handleChange={this.handleChange} />
         <ul>{result}</ul>
