@@ -2,6 +2,7 @@ import "./App.css";
 import Input from "./components/Input";
 import React, { Component } from "react";
 import ListItem from "./components/ListItem";
+import RadioButton from "./components/RadioButton";
 
 class App extends Component {
   constructor() {
@@ -360,6 +361,7 @@ class App extends Component {
         },
       ],
       inputValue: "",
+      radioBtn: "capital"
     };
   }
 
@@ -368,10 +370,14 @@ class App extends Component {
     this.setState({ inputValue: inputName });
   };
 
+  handleRadio = (e) => {
+    this.setState({radioBtn: e.target.id})
+  }
+
   render() {
-    const { data, inputValue } = this.state;
+    const { data, inputValue, radioBtn } = this.state;
     const result = data
-      .filter((el) => el.name.toLowerCase().startsWith(inputValue))
+      .filter((el) => el[radioBtn].toLowerCase().startsWith(inputValue))
       .map((el) => {
         const { name, capital, abbr } = el;
         return (
@@ -381,12 +387,22 @@ class App extends Component {
 
     return (
       <div className="App">
+        <h2>Search by:</h2>
+        <RadioButton/>
+        <RadioButton/>
+        <RadioButton/>
+        {/* <label htmlFor="name">Name</label>
+        <input type="radio" id="name" name="location" onChange={this.handleRadio} checked={radioBtn === "name"}/>
+        <label htmlFor="capital">Capital</label>
+        <input type="radio" id="capital" name="location" onChange={this.handleRadio} checked={radioBtn === "capital"}/>
+        <label htmlFor="abbr">Abbreviation</label>
+        <input type="radio" id="abbr" name="location" onChange={this.handleRadio} checked={radioBtn === "abbr"}/> */}
+        <br />
         <Input value={inputValue} handleChange={this.handleChange} />
         <ul>{result}</ul>
       </div>
     );
   }
-  /* test */
 }
 
 export default App;
