@@ -403,6 +403,8 @@ class App extends Component {
       </div>
     );
   }
+
+  /* test */
 }
 
 export default App;
